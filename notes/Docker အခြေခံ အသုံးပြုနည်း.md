@@ -158,20 +158,20 @@ Bridge Network ဆိုတာ Container တွေအတွက် သီးသ�
 Container တွေ တစ်ခုနှင့်တစ်ခု ချိတ်ဆက်ဖို့အတွက် အကောင်းဆုံးနှင့် အလွယ်ကူဆုံးနည်းလမ်းကတော့ Docker Compose ကိုအသုံးပြုပြီး Custom Network တစ်ခုတည်းအောက်မှာ ထားရှိခြင်းဖြစ်ပါတယ်။ Docker Compose ကို သုံးချင်းအားဖြင့် အလိုလျှောက် Network တစ်ခုတည်ဆောက်ပေးပြီး Container အချင်းချင်းကို Service Name နှင့် လှမ်းခေါ်နိုင်ပါတယ်။ IP Address တွေအသုံးပြုစရာ မလိုတဲ့အတွက် အဆင်ပြေတယ်။ ဥပမာ Python ကနေ Redis ထဲကို data လှမ်းသိမ်းမယ့် Network ပုံစံကို  အောက်ပါအတိုင်း တွေ့ရပါတယ်။
 ```docker-compose.yaml
 services:
-  web-app:		      # Web application server
-    build: .		    # Use Dockerfile in current folder to build container
+  web-app:          # Web application server
+    build: .        # Use Dockerfile in current folder to build container
     ports:
       - "5000:5000"
     networks:
       - my-app-net  # Use the bridge network name
 
-  redis-server:		  # Redis server and default port is 6379
+  redis-server:     # Redis server and default port is 6379
     image: "redis:alpine" # Use Redis image from Docker Hub
     networks:
       - my-app-net  # Use the bridge network name
 
 networks:
-  my-app-net:		    # Create a custom bridge network
+  my-app-net:       # Create a custom bridge network
     driver: bridge
 ```
 ### Python Code ထဲမှာ နမူနာအသုံးပြုပုံ
