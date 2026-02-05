@@ -5,7 +5,7 @@ Docker ကို Install လုပ်ဖို့ မိမိ Operating System 
 ## Image နှင့် Container အကြောင်း
 Docker ထဲမှာပါတဲ့ အဓိက Component နှစ်ခုကတော့ Image နှင့် Container ဖြစ်ပါတယ်။
 ### Image
-Image ဆိုတာ အဆင်သင့်အသုံးပြုနိုင်တဲ့ Template ဖြစ်ပါတယ်။ Application တစ်ခုအလုပ်လုပ်နိုင်ဖို့ လိုအပ်တဲ့ Services ၊ Libraries ၊ Dependencies နှင့် Settings တွေအားလုံး စုစည်းထားတဲ့ Package တစ်ခုဖြစ်ပါတယ်။ Object Oriented Programming (OOP) သဘောတရားအရ ပြောမယ်ဆိုရင် Image ဆိုတာ Class နှင့် အတူတူပဲဖြစ်ပါတယ်။ Docker Image တွေကို Hocker Hub ထဲမှာတွေ့နိုင်ပါတယ်။ ဒီ [Link](https://hub.docker.com/) ကနေဝင်ကြည့်လို့ရတယ်။
+Image ဆိုတာ အဆင်သင့်အသုံးပြုနိုင်တဲ့ Template ဖြစ်ပါတယ်။ Application တစ်ခုအလုပ်လုပ်နိုင်ဖို့ လိုအပ်တဲ့ Services ၊ Libraries ၊ Dependencies နှင့် Settings တွေအားလုံး စုစည်းထားတဲ့ Package တစ်ခုဖြစ်ပါတယ်။ Object Oriented Programming (OOP) သဘောတရားအရ ပြောမယ်ဆိုရင် Image ဆိုတာ Class နှင့် အတူတူပဲဖြစ်ပါတယ်။ Docker Image တွေကို Docker Hub ထဲမှာတွေ့နိုင်ပါတယ်။ ဒီ [Link](https://hub.docker.com/) ကနေဝင်ကြည့်လို့ရတယ်။
 ### Container
 Container ဆိုတာ Image ကိုအသုံးပြုပြီး တည်ဆောက်လိုက်လို့ ဖြစ်လာတဲ့အရာကို Container လို့ခေါ်ပါတယ်။ OOP မှာ Class ကနေ Object ဖြစ်သလိုပဲ၊ Docker မှာလည်း Image ကနေ ပွားယူလိုက်လို့ ရလာတာကို Container လို့ခေါ်ပါတယ်။ Image တစ်ခုကနေ Container တွေအများကြီး တည်ဆောက်နိုင်ပါတယ်။ Container တစ်ခုချင်းစီဟာ သီးခြားစီ (Isolated) တည်ရှိပြီးတော့ အလုပ်လုပ်ကြတယ်။
 ## Docker File အကြောင်း
@@ -75,8 +75,8 @@ Application (သို့မဟုတ်) Service တစ်ခုအတွက်
 │   └── layout.html
 ├── app.py                # Main file, it contains routes and app creation
 ├── config.py             # Configuration settings
-├── Dockerfile            # Docker file to build a web server
-├── docker-compose.yml    # Create and build app and database servers
+├── Dockerfile            # Docker file to build container for a web server
+├── docker-compose.yml    # Create and build containers for app and database servers
 └── requirements.txt      # Project dependencies
 ```
 
@@ -86,9 +86,9 @@ Docker Compose File ရဲ့ File Extension ကို **.yml** (သို့မ
 version: '3.8'
 services:
   web:
-    build: .             # Use Dockerfile to build from current folder
+    build: .             # Use Dockerfile in current folder to build container
     ports:
-      - "5000:5000"
+      - "5000:5000"      # Map port 5000 of Main OS to port 5000 of Container
     depends_on:
       - db               # Start Web once database server up
   db:
@@ -149,7 +149,7 @@ Docker ကို စိတ်ကြိုက် စီမံခန့်ခွ�
 * ```-f```: Log တွေကို Real Time တောက်လျှောက်ကြည့်ချင်ရင် သုံးပါတယ်။
 	* ဥပမာ ```docker compose logs -f my-web-app```
 ## Container Networking အကြောင်း
-Container တွေဟာ ပုံမှန်အားဖြင့်ဆိုရင် တစ်ခုနဲ့တစ်ခု သီးခြားစီတည်ရှိပါတယ်။ အကယ်၍ Container တွေ ဆက်သွယ်ဖို့ လိုအပ်လာတယ်ဆိုရင် Docker Network ကို သုံးနိုင်ပါတယ်။ Docker ထဲမှာ Network Driver တွေအများကြီးရှိပေမယ့် အသုံးအများဆုံးကတော့ Bridge Network ဖြစ်ပါတယ်။ အခြေခံအကျဆုံးလည်း ဖြစ်တာကြောင့် Default အနေနှင့်သုံးပါတယ်။
+Container တွေဟာ ပုံမှန်အားဖြင့်ဆိုရင် တစ်ခုနှင့်တစ်ခု သီးခြားစီတည်ရှိပါတယ်။ အကယ်၍ Container တွေ ဆက်သွယ်ဖို့ လိုအပ်လာတယ်ဆိုရင် Docker Network ကို သုံးနိုင်ပါတယ်။ Docker ထဲမှာ Network Driver တွေအများကြီးရှိပေမယ့် အသုံးအများဆုံးကတော့ Bridge Network ဖြစ်ပါတယ်။ အခြေခံအကျဆုံးလည်း ဖြစ်တာကြောင့် Default အနေနှင့်သုံးပါတယ်။
 
 ### Bridge Network
 Bridge Network ဆိုတာ Container တွေအတွက် သီးသန့်ဆောက်ပေးထားတဲ့ Virtual Switch တစ်ခုလိုဖြစ်ပါတယ်။ Network ထဲမှာ ရှိနေတဲ့ Container အချင်းချင်းပဲ ဆက်သွယ်လို့ ရပြီးတော့ Bridge အပြင်ဘက် တခြား Network ထဲက Container တွေကနေ လှမ်းချိတ်လို့မရပါဘူး။ အကယ်၍ စက်ထဲမှာ ဘာ Network တွေ ရှိနေလဲဆိုတာကို ```docker network ls``` command နှင့် ကြည့်နိုင်ပါတယ်။
@@ -158,23 +158,34 @@ Bridge Network ဆိုတာ Container တွေအတွက် သီးသ�
 Container တွေ တစ်ခုနှင့်တစ်ခု ချိတ်ဆက်ဖို့အတွက် အကောင်းဆုံးနှင့် အလွယ်ကူဆုံးနည်းလမ်းကတော့ Docker Compose ကိုအသုံးပြုပြီး Custom Network တစ်ခုတည်းအောက်မှာ ထားရှိခြင်းဖြစ်ပါတယ်။ Docker Compose ကို သုံးချင်းအားဖြင့် အလိုလျှောက် Network တစ်ခုတည်ဆောက်ပေးပြီး Container အချင်းချင်းကို Service Name နှင့် လှမ်းခေါ်နိုင်ပါတယ်။ IP Address တွေအသုံးပြုစရာ မလိုတဲ့အတွက် အဆင်ပြေတယ်။ ဥပမာ Python ကနေ Redis ထဲကို data လှမ်းသိမ်းမယ့် Network ပုံစံကို  အောက်ပါအတိုင်း တွေ့ရပါတယ်။
 ```docker-compose.yaml
 services:
-  web-app:		# Web application server
-    build: .		# Use Dockerfile to build from current folder
+  web-app:		      # Web application server
+    build: .		    # Use Dockerfile in current folder to build container
     ports:
       - "5000:5000"
     networks:
-      - my-app-net	# Use the bridge network name
+      - my-app-net  # Use the bridge network name
 
-  redis-server:		# Redis server
+  redis-server:		  # Redis server and default port is 6379
     image: "redis:alpine" # Use Redis image from Docker Hub
     networks:
-      - my-app-net	# Use the bridge network name
+      - my-app-net  # Use the bridge network name
 
 networks:
-  my-app-net:		# Create a custom bridge network
+  my-app-net:		    # Create a custom bridge network
     driver: bridge
 ```
+### Python Code ထဲမှာ နမူနာအသုံးပြုပုံ
+```python
+import redis
 
+# Connect to Redis using the service name from docker-compose.yaml
+r = redis.Redis(host='redis-server', port=6379, db=0)
+
+# Set and get a value
+r.set('mykey', 'Hello from Python!')
+value = r.get('mykey')
+print(value.decode('utf-8'))
+```
 ### Main OS ကနေ Container သို့ ချိတ်ဆက်ပုံ
 Container ထဲမှာ Run နေတဲ့ Web Server (ဥပမာ Port 80) ကို Main OS ရဲ့ Browser ကနေ ကြည့်ချင်ရင် Port Mapping လုပ်ပေးရပါတယ်။ ဥပမာ Container ထဲမှာ Run နေတဲ့ Nginx Server ကို Main OS ကနေကြည့်ဖို့အတွက် ```docker run -p 8080:80 nginx``` Command ကိုအသုံးပြီးတော့ Main OS ရဲ့ Browser ကနေ ```http:\\localhost:8080``` လို့လှမ်းခေါ်လိုက်ရင် Container ထဲက Port 80 ဆီကို ရောက်သွားမှာဖြစ်ပါတယ်။
 ## Security အတွက် သိသင့်သည်များ
