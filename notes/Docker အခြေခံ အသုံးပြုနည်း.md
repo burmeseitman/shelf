@@ -174,7 +174,7 @@ networks:
   my-app-net:       # Create a custom bridge network
     driver: bridge
 ```
-### Python Code ထဲမှာ နမူနာအသုံးပြုပုံ
+### Python Code ထဲမှာ Redis Server ကို ချိတ်ဆက်အသုံးပြုပုံ
 ```python
 import redis
 
